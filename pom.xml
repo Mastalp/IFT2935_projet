@@ -14,14 +14,22 @@
     <maven.compiler.compilerVersion>21.0.1</maven.compiler.compilerVersion>
   </properties>
 
+  <dependencies>
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>42.7.3</version>
+    </dependency>
+  </dependencies>
+
   <build>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.12.1</version> <!-- Use the latest version available -->
+        <version>3.12.1</version>
         <configuration>
-          <release>21.0.1</release> <!-- Java version -->
+          <release>21.0.1</release>
         </configuration>
       </plugin>
     </plugins>
