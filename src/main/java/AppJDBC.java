@@ -17,7 +17,8 @@ public class App extends JPanel {
     public static final String Q1QUERY = "SELECT * FROM parcinfo.installer;";
     public static final String Q2QUERY = "SELECT * FROM parcinfo.installer;";
     public static final String Q3QUERY = "SELECT * FROM parcinfo.installer;";
-    public static final String Q4QUERY = "SELECT * FROM parcinfo.installer;";
+    public static final String Q4QUERY = "SELECT * FROM parcinfo.inst" +
+            "aller;";
 
     public App() throws SQLException {
 
