@@ -1,9 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE hibernate-configuration PUBLIC
         "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <!-- Database connection settings -->
         <property name="connection.driver_class">org.postgresql.Driver</property>
         <property name="connection.url">jdbc:postgresql://localhost:5432/postgres</property>
         <property name="connection.username">postgres</property>
@@ -13,7 +13,7 @@
         <property name="connection.pool_size">1</property>
 
         <!-- SQL dialect -->
-        <property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+        <!-- <property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property> -->
 
         <!-- Enable Hibernate's automatic session context management -->
         <property name="current_session_context_class">thread</property>
@@ -22,17 +22,14 @@
         <property name="show_sql">true</property>
 
         <!-- Drop and re-create the database schema on startup -->
-        <property name="hbm2ddl.auto">update</property>
-        <mapping class="company_sem2_entity.DepartmentEntity"/>
-        <mapping class="company_sem2_entity.DependentEntity"/>
-        <mapping class="company_sem2_entity.EmployeeEntity"/>
-        <mapping class="company_sem2_entity.DeptLocationsEntity"/>
-        <mapping class="company_sem2_entity.ProjectEntity"/>
-        <mapping class="company_sem2_entity.WorksOnEntity"/>
+        <property name="hbm2ddl.auto">validate</property>
 
-        <!-- Mapped classes -->
-        <!-- |     <mapping class="com.yourpackage.YourEntityClass"/>     | -->
+        <mapping class="entity.Adherents"/>
+        <mapping class="entity.Commandes"/>
+        <mapping class="entity.Emprunts"/>
+        <mapping class="entity.Livres"/>
 
-        <!-- Add more mapped classes here -->
+
+
     </session-factory>
 </hibernate-configuration>
