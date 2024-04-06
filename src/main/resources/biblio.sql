@@ -43,21 +43,21 @@ CREATE TABLE EMPRUNTS
 );
 
 INSERT INTO LIVRES (NOLIVRE, QTITY, AUTEUR, GENRE, TITRE) VALUES
-(1, 3, 'Victor Hugo', 'Roman', 'Les Misérables'),
+(1, 3, 'Victor Hugo', 'Roman', 'Les Miserables'),
 (2, 2, 'Alexandre Dumas', 'Aventure', 'Le Comte de Monte-Cristo'),
 (3, 4, 'Gustave Flaubert', 'Roman', 'Madame Bovary'),
-(4, 1, 'Émile Zola', 'Roman', 'Germinal');
+(4, 1, 'Emile Zola', 'Roman', 'Germinal');
 
 INSERT INTO ADHERENTS (NOADHERENT, NOM, ADRESSE) VALUES
-(1, 'Jean Dupont', '123 Rue La Boétie, Paris'),
+(1, 'Jean Dupont', '123 Rue La Boetie, Paris'),
 (2, 'Marie Curie', '456 Avenue Montaigne, Paris'),
-(3, 'Henri Poincaré', '789 Boulevard Saint-Germain, Paris'),
-(4, 'Édith Piaf', '321 Rue du Bac, Paris');
+(3, 'Henri Poincare', '789 Boulevard Saint-Germain, Paris'),
+(4, 'Edith Piaf', '321 Rue du Bac, Paris');
 
 INSERT INTO COMMANDES (NOCOMMANDE, NOLIVRE, NOADHERENT, DATECOMMANDE, STATUT) VALUES
 (1, 1, 1, '2024-04-01 10:00:00', 'en attente'),
-(2, 2, 2, '2024-04-02 11:00:00', 'honorée'),
-(3, 3, 3, '2024-04-03 12:00:00', 'annulée'),
+(2, 2, 2, '2024-04-02 11:00:00', 'honoree'),
+(3, 3, 3, '2024-04-03 12:00:00', 'annulee'),
 (4, 4, 4, '2024-04-04 13:00:00', 'en attente');
 
 INSERT INTO EMPRUNTS (NOEMPRUNT, NOLIVRE, NOADHERENT, DATEEMPRUNT, DATERETOUR) VALUES

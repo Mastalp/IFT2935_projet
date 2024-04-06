@@ -19,10 +19,7 @@ public class DatabaseConfig {
         }
     }
 
-    public static String getDbUrl() {
-
-        return properties.getProperty("db.url");
-    }
+    public static String getDbUrl() { return properties.getProperty("db.url");}
 
     public static String getDbUsername() {
         return properties.getProperty("db.username");

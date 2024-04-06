@@ -1,8 +1,7 @@
 <archetype>
   <id>IFT2935_projet</id>
   <sources>
-    <source>src/main/java/AppJDBC.java</source>
-    <source>src/main/java/AppHibernate.java</source>
+    <source>src/main/java/Main.java</source>
   </sources>
   <testSources>
     <source>src/test/java/AppTest.java</source>

@@ -6,16 +6,13 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 import org.hibernate.transform.AliasToEntityMapResultTransformer;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -147,7 +144,7 @@ public class AppHibernate extends JPanel {
         return sb.toString();
     }
 
-    public static void main(String[] args) {
+    public static void run() {
         SwingUtilities.invokeLater(() -> {
             // Create the frame to hold the panel
             JFrame frame = new JFrame();
@@ -171,8 +168,10 @@ public class AppHibernate extends JPanel {
 
             frame.setVisible(true);
 
-
         });
     }
 
+    public static void main(String[] args) {
+        run();
+    }
 }

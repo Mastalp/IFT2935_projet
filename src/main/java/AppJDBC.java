@@ -1,5 +1,3 @@
-import org.xml.sax.ext.Attributes2;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,19 +6,17 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.*;
 
-public class App extends JPanel {
+public class AppJDBC extends JPanel {
 
     private Connection conn;
+    private JTextArea infoTextArea = new JTextArea("");
+    // placeholder queries
+    private static final String Q1QUERY = "SELECT * FROM biblio.livres;";
+    private static final String Q2QUERY = "SELECT * FROM biblio.adherents;";
+    private static final String Q3QUERY = "SELECT * FROM biblio.commandes;";
+    private static final String Q4QUERY = "SELECT * FROM biblio.emprunts";
 
-    public JTextArea infoTextArea = new JTextArea("");
-
-    public static final String Q1QUERY = "SELECT * FROM parcinfo.installer;";
-    public static final String Q2QUERY = "SELECT * FROM parcinfo.installer;";
-    public static final String Q3QUERY = "SELECT * FROM parcinfo.installer;";
-    public static final String Q4QUERY = "SELECT * FROM parcinfo.inst" +
-            "aller;";
-
-    public App() throws SQLException {
+    public AppJDBC() throws SQLException {
 
         // Initialize connection
         initConnection();
@@ -123,6 +119,7 @@ public class App extends JPanel {
 
 
     public String processQueryAndFormatToString(String query) throws SQLException {
+        if (conn == null) return "no connection!";
         StringBuilder sb = new StringBuilder();
         Statement st = conn.createStatement();
         ResultSet rs = st.executeQuery(query);
@@ -142,7 +139,7 @@ public class App extends JPanel {
         return sb.toString();
     }
 
-    public static void main(String[] args) {
+    public static void run() {
         SwingUtilities.invokeLater(() -> {
             // Create the frame to hold the panel
             JFrame frame = new JFrame();
@@ -152,8 +149,8 @@ public class App extends JPanel {
             // Add the panel to the frame
 
             try {
-                App app = new App();
-                frame.add(app);
+                AppJDBC appJDBC = new AppJDBC();
+                frame.add(appJDBC);
                 // Set the size and make the frame visible
                 frame.setSize(600, 400);
 
@@ -161,7 +158,7 @@ public class App extends JPanel {
                     @Override
                     public void windowClosed(WindowEvent e) {
                         try {
-                            closeConnection(app.conn);
+                            closeConnection(appJDBC.conn);
                         } catch (SQLException ex) {
                             throw new RuntimeException(ex);
                         }
@@ -178,5 +175,9 @@ public class App extends JPanel {
 
 
         });
+    }
+
+    public static void main(String[] args) {
+        run();
     }
 }
