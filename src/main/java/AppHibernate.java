@@ -38,7 +38,7 @@ public class AppHibernate extends JPanel {
         JLabel titleLabel = new JLabel("Retour de la requete: ", SwingConstants.CENTER);
 
         // Create the text area for displaying information
-        infoTextArea.setText("TO DO ");
+        infoTextArea.setText("");
         infoTextArea.setEditable(false); // if you don't want it to be editable
 
         // Create the panel for buttons

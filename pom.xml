@@ -8,10 +8,10 @@
   <url>http://maven.apache.org</url>
 
   <properties>
-    <java.version>17.0.10</java.version>
-    <maven.compiler.source>17.0.10</maven.compiler.source>
-    <maven.compiler.target>17.0.10</maven.compiler.target>
-    <maven.compiler.compilerVersion>17.0.10</maven.compiler.compilerVersion>
+    <java.version>17</java.version>
+
+    <maven.compiler.compilerVersion>17</maven.compiler.compilerVersion>
+    <maven.compiler.release>17</maven.compiler.release>
   </properties>
 
   <dependencies>
@@ -41,10 +41,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.12.1</version>
-        <configuration>
-          <release>21.0.1</release>
-        </configuration>
+        <version>3.11.0</version>
       </plugin>
 
       <plugin>
@@ -53,9 +50,36 @@
         <configuration>
           <archive>
             <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <classpathPrefix>lib/</classpathPrefix>
+              <mainClass>Main</mainClass>
+            </manifest>
           </archive>
         </configuration>
       </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.5.2</version> <!-- Make sure to check for the latest version -->
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <transformers>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                  <mainClass>Main</mainClass>
+                </transformer>
+              </transformers>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
     </plugins>
 
     <finalName>ift2935_projet</finalName>
