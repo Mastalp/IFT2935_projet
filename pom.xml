@@ -8,10 +8,10 @@
   <url>http://maven.apache.org</url>
 
   <properties>
-    <java.version>21.0.1</java.version>
-    <maven.compiler.source>21.0.1</maven.compiler.source>
-    <maven.compiler.target>21.0.1</maven.compiler.target>
-    <maven.compiler.compilerVersion>21.0.1</maven.compiler.compilerVersion>
+    <java.version>17.0.10</java.version>
+    <maven.compiler.source>17.0.10</maven.compiler.source>
+    <maven.compiler.target>17.0.10</maven.compiler.target>
+    <maven.compiler.compilerVersion>17.0.10</maven.compiler.compilerVersion>
   </properties>
 
   <dependencies>
