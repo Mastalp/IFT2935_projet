@@ -2,72 +2,71 @@ package entity;
 
 import jakarta.persistence.*;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 import java.util.Objects;
 
 @Entity
+@IdClass(EmpruntsPK.class)
 public class Emprunts {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "noemprunt")
-    private int noemprunt;
-    @Basic
-    @Column(name = "nolivre", insertable = false, updatable = false)
-    private Integer nolivre;
-    @Basic
-    @Column(name = "noadherent", insertable = false, updatable = false)
-    private Integer noadherent;
+    @Column(name = "nolivre")
+    private int nolivre;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column(name = "noadherent")
+    private int noadherent;
     @Basic
     @Column(name = "dateemprunt")
-    private Timestamp dateemprunt;
+    private Date dateemprunt;
     @Basic
     @Column(name = "dateretour")
-    private Timestamp dateretour;
+    private Date dateretour;
+    @Basic
+    @Column(name = "statut")
+    private String statut;
     @ManyToOne
-    @JoinColumn(name = "nolivre", referencedColumnName = "nolivre")
-    private Livres livresByNolivre;
-    @ManyToOne
-    @JoinColumn(name = "noadherent", referencedColumnName = "noadherent")
+    @JoinColumn(name = "noadherent", referencedColumnName = "noadherent", nullable = false)
     private Adherents adherentsByNoadherent;
 
-    public int getNoemprunt() {
-        return noemprunt;
-    }
-
-    public void setNoemprunt(int noemprunt) {
-        this.noemprunt = noemprunt;
-    }
-
-    public Integer getNolivre() {
+    public int getNolivre() {
         return nolivre;
     }
 
-    public void setNolivre(Integer nolivre) {
+    public void setNolivre(int nolivre) {
         this.nolivre = nolivre;
     }
 
-    public Integer getNoadherent() {
+    public int getNoadherent() {
         return noadherent;
     }
 
-    public void setNoadherent(Integer noadherent) {
+    public void setNoadherent(int noadherent) {
         this.noadherent = noadherent;
     }
 
-    public Timestamp getDateemprunt() {
+    public Date getDateemprunt() {
         return dateemprunt;
     }
 
-    public void setDateemprunt(Timestamp dateemprunt) {
+    public void setDateemprunt(Date dateemprunt) {
         this.dateemprunt = dateemprunt;
     }
 
-    public Timestamp getDateretour() {
+    public Date getDateretour() {
         return dateretour;
     }
 
-    public void setDateretour(Timestamp dateretour) {
+    public void setDateretour(Date dateretour) {
         this.dateretour = dateretour;
+    }
+
+    public String getStatut() {
+        return statut;
+    }
+
+    public void setStatut(String statut) {
+        this.statut = statut;
     }
 
     @Override
@@ -75,20 +74,12 @@ public class Emprunts {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Emprunts emprunts = (Emprunts) o;
-        return noemprunt == emprunts.noemprunt && Objects.equals(nolivre, emprunts.nolivre) && Objects.equals(noadherent, emprunts.noadherent) && Objects.equals(dateemprunt, emprunts.dateemprunt) && Objects.equals(dateretour, emprunts.dateretour);
+        return nolivre == emprunts.nolivre && noadherent == emprunts.noadherent && Objects.equals(dateemprunt, emprunts.dateemprunt) && Objects.equals(dateretour, emprunts.dateretour) && Objects.equals(statut, emprunts.statut);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(noemprunt, nolivre, noadherent, dateemprunt, dateretour);
-    }
-
-    public Livres getLivresByNolivre() {
-        return livresByNolivre;
-    }
-
-    public void setLivresByNolivre(Livres livresByNolivre) {
-        this.livresByNolivre = livresByNolivre;
+        return Objects.hash(nolivre, noadherent, dateemprunt, dateretour, statut);
     }
 
     public Adherents getAdherentsByNoadherent() {

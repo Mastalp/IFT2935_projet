@@ -22,13 +22,14 @@
         <property name="show_sql">true</property>
 
         <!-- Drop and re-create the database schema on startup -->
-        <property name="hbm2ddl.auto">validate</property>
+        <property name="hbm2ddl.auto">create</property>
 
+        <mapping class="entity.Livres"/>
+        <mapping class="entity.Auteurs"/>
         <mapping class="entity.Adherents"/>
         <mapping class="entity.Commandes"/>
+        <mapping class="entity.Livrescommande"/>
         <mapping class="entity.Emprunts"/>
-        <mapping class="entity.Livres"/>
-
 
 
     </session-factory>

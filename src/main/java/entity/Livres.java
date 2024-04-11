@@ -13,20 +13,14 @@ public class Livres {
     private int nolivre;
     @Basic
     @Column(name = "qtity")
-    private Integer qtity;
-    @Basic
-    @Column(name = "auteur")
-    private String auteur;
+    private int qtity;
     @Basic
     @Column(name = "genre")
     private String genre;
     @Basic
     @Column(name = "titre")
     private String titre;
-    @OneToMany(mappedBy = "livresByNolivre")
-    private Collection<Commandes> commandesByNolivre;
-    @OneToMany(mappedBy = "livresByNolivre")
-    private Collection<Emprunts> empruntsByNolivre;
+
 
     public int getNolivre() {
         return nolivre;
@@ -36,20 +30,12 @@ public class Livres {
         this.nolivre = nolivre;
     }
 
-    public Integer getQtity() {
+    public int getQtity() {
         return qtity;
     }
 
-    public void setQtity(Integer qtity) {
+    public void setQtity(int qtity) {
         this.qtity = qtity;
-    }
-
-    public String getAuteur() {
-        return auteur;
-    }
-
-    public void setAuteur(String auteur) {
-        this.auteur = auteur;
     }
 
     public String getGenre() {
@@ -73,27 +59,13 @@ public class Livres {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Livres livres = (Livres) o;
-        return nolivre == livres.nolivre && Objects.equals(qtity, livres.qtity) && Objects.equals(auteur, livres.auteur) && Objects.equals(genre, livres.genre) && Objects.equals(titre, livres.titre);
+        return nolivre == livres.nolivre && qtity == livres.qtity && Objects.equals(genre, livres.genre) && Objects.equals(titre, livres.titre);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nolivre, qtity, auteur, genre, titre);
+        return Objects.hash(nolivre, qtity, genre, titre);
     }
 
-    public Collection<Commandes> getCommandesByNolivre() {
-        return commandesByNolivre;
-    }
 
-    public void setCommandesByNolivre(Collection<Commandes> commandesByNolivre) {
-        this.commandesByNolivre = commandesByNolivre;
-    }
-
-    public Collection<Emprunts> getEmpruntsByNolivre() {
-        return empruntsByNolivre;
-    }
-
-    public void setEmpruntsByNolivre(Collection<Emprunts> empruntsByNolivre) {
-        this.empruntsByNolivre = empruntsByNolivre;
-    }
 }

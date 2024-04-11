@@ -13,6 +13,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Map;
 
@@ -21,10 +25,10 @@ public class AppHibernate extends JPanel {
     private JTextArea infoTextArea = new JTextArea("");
 
     // placeholder queries
-    private static final String Q1QUERY = "SELECT * FROM biblio.livres;";
-    private static final String Q2QUERY = "SELECT * FROM biblio.adherents;";
-    private static final String Q3QUERY = "SELECT * FROM biblio.commandes;";
-    private static final String Q4QUERY = "SELECT * FROM biblio.emprunts";
+    private static final String Q1QUERYPATH = "q1.sql";
+    private static final String Q2QUERYPATH = "q2.sql";
+    private static final String Q3QUERYPATH = "q3.sql";
+    private static final String Q4QUERYPATH = "q4.sql";
 
 
     public AppHibernate() {
@@ -52,7 +56,7 @@ public class AppHibernate extends JPanel {
         b1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                infoTextArea.setText(processQueryAndFormatToString(Q1QUERY));
+                infoTextArea.setText(processQueryAndFormatToString(loadQueryFromFile(Q1QUERYPATH)));
 
             }
         });
@@ -60,7 +64,7 @@ public class AppHibernate extends JPanel {
         b2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                infoTextArea.setText(processQueryAndFormatToString(Q2QUERY));
+                infoTextArea.setText(processQueryAndFormatToString(loadQueryFromFile(Q2QUERYPATH)));
 
             }
         });
@@ -68,7 +72,7 @@ public class AppHibernate extends JPanel {
         b3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                infoTextArea.setText(processQueryAndFormatToString(Q3QUERY));
+                infoTextArea.setText(processQueryAndFormatToString(loadQueryFromFile(Q3QUERYPATH)));
 
             }
         });
@@ -76,7 +80,7 @@ public class AppHibernate extends JPanel {
         b4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                infoTextArea.setText(processQueryAndFormatToString(Q4QUERY));
+                infoTextArea.setText(processQueryAndFormatToString(loadQueryFromFile(Q4QUERYPATH)));
 
             }
         });
@@ -108,27 +112,21 @@ public class AppHibernate extends JPanel {
         }
     }
 
-    public String processQueryAndFormatToString(String hql) {
+    public String processQueryAndFormatToString(String sql) {
 
         StringBuilder sb = new StringBuilder();
-
         Session session = sessionFactory.openSession();
-
         Transaction transaction = null;
 
         try {
             transaction = session.beginTransaction(); // Begin transaction
 
             // Assuming Q1QUERY is a native SQL query. If it's HQL, use session.createQuery()
-            Query query = session.createNativeQuery(hql);
-
+            Query query = session.createNativeQuery(sql);
             query.setResultTransformer(AliasToEntityMapResultTransformer.INSTANCE);
-
-            List<Map<String, Object>> results = query.getResultList(); // Adjusted for native queries usually returning Object[] for each row
-
+            List<Map<String, Object>> results = query.getResultList();
 
             for (Object row : results) {
-
                 sb.append(row.toString());
                 sb.append("\n");
             }
@@ -144,6 +142,21 @@ public class AppHibernate extends JPanel {
         return sb.toString();
     }
 
+    private String loadQueryFromFile(String filePath) {
+        StringBuilder query = new StringBuilder();
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(filePath);
+             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                query.append(line).append("\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Couldn't load the file: " + filePath, "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return query.toString();
+    }
+
     public static void run() {
         SwingUtilities.invokeLater(() -> {
             // Create the frame to hold the panel
@@ -152,7 +165,6 @@ public class AppHibernate extends JPanel {
             frame.setTitle("IFT2935 - Projet");
 
             // Add the panel to the frame
-
             AppHibernate appHibernate = new AppHibernate();
             frame.add(appHibernate);
             // Set the size and make the frame visible
@@ -167,7 +179,6 @@ public class AppHibernate extends JPanel {
             });
 
             frame.setVisible(true);
-
         });
     }
 

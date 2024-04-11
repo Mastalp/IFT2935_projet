@@ -2,7 +2,6 @@ package entity;
 
 import jakarta.persistence.*;
 
-import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -15,12 +14,20 @@ public class Adherents {
     @Column(name = "nom")
     private String nom;
     @Basic
-    @Column(name = "adresse")
-    private String adresse;
-    @OneToMany(mappedBy = "adherentsByNoadherent")
-    private Collection<Commandes> commandesByNoadherent;
-    @OneToMany(mappedBy = "adherentsByNoadherent")
-    private Collection<Emprunts> empruntsByNoadherent;
+    @Column(name = "prenom")
+    private String prenom;
+    @Basic
+    @Column(name = "codepostal")
+    private String codepostal;
+    @Basic
+    @Column(name = "norue")
+    private int norue;
+    @Basic
+    @Column(name = "rue")
+    private String rue;
+    @Basic
+    @Column(name = "ville")
+    private String ville;
 
     public int getNoadherent() {
         return noadherent;
@@ -38,12 +45,44 @@ public class Adherents {
         this.nom = nom;
     }
 
-    public String getAdresse() {
-        return adresse;
+    public String getPrenom() {
+        return prenom;
     }
 
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    public String getCodepostal() {
+        return codepostal;
+    }
+
+    public void setCodepostal(String codepostal) {
+        this.codepostal = codepostal;
+    }
+
+    public int getNorue() {
+        return norue;
+    }
+
+    public void setNorue(int norue) {
+        this.norue = norue;
+    }
+
+    public String getRue() {
+        return rue;
+    }
+
+    public void setRue(String rue) {
+        this.rue = rue;
+    }
+
+    public String getVille() {
+        return ville;
+    }
+
+    public void setVille(String ville) {
+        this.ville = ville;
     }
 
     @Override
@@ -51,27 +90,11 @@ public class Adherents {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Adherents adherents = (Adherents) o;
-        return noadherent == adherents.noadherent && Objects.equals(nom, adherents.nom) && Objects.equals(adresse, adherents.adresse);
+        return noadherent == adherents.noadherent && norue == adherents.norue && Objects.equals(nom, adherents.nom) && Objects.equals(prenom, adherents.prenom) && Objects.equals(codepostal, adherents.codepostal) && Objects.equals(rue, adherents.rue) && Objects.equals(ville, adherents.ville);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(noadherent, nom, adresse);
-    }
-
-    public Collection<Commandes> getCommandesByNoadherent() {
-        return commandesByNoadherent;
-    }
-
-    public void setCommandesByNoadherent(Collection<Commandes> commandesByNoadherent) {
-        this.commandesByNoadherent = commandesByNoadherent;
-    }
-
-    public Collection<Emprunts> getEmpruntsByNoadherent() {
-        return empruntsByNoadherent;
-    }
-
-    public void setEmpruntsByNoadherent(Collection<Emprunts> empruntsByNoadherent) {
-        this.empruntsByNoadherent = empruntsByNoadherent;
+        return Objects.hash(noadherent, nom, prenom, codepostal, norue, rue, ville);
     }
 }
