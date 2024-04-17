@@ -1,4 +1,3 @@
-import entity.Livres;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -24,7 +23,7 @@ public class AppHibernate extends JPanel {
     private static SessionFactory sessionFactory;
     private JTextArea infoTextArea = new JTextArea("");
 
-    // placeholder queries
+    //
     private static final String Q1QUERYPATH = "q1.sql";
     private static final String Q2QUERYPATH = "q2.sql";
     private static final String Q3QUERYPATH = "q3.sql";
@@ -100,7 +99,6 @@ public class AppHibernate extends JPanel {
     }
 
     private static void initSessionFactory() {
-        // Configuration can also be done programmatically
         sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
         System.out.println("Hibernate SessionFactory Configured.");
     }
@@ -122,6 +120,7 @@ public class AppHibernate extends JPanel {
             transaction = session.beginTransaction(); // Begin transaction
 
             // Assuming Q1QUERY is a native SQL query. If it's HQL, use session.createQuery()
+            // METHODS ARE DEPRECATED
             Query query = session.createNativeQuery(sql);
             query.setResultTransformer(AliasToEntityMapResultTransformer.INSTANCE);
             List<Map<String, Object>> results = query.getResultList();
