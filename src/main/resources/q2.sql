@@ -11,5 +11,4 @@ WITH FilteredEmprunts AS (
 SELECT L.TITRE, A.NOM, A.PRENOM, E.DATEEMPRUNT
 FROM FilteredEmprunts E
          JOIN biblio.livres L ON E.NOLIVRE = L.NOLIVRE
-         JOIN FilteredAdherents A ON E.NOADHERENT = A.NOADHERENT
-ORDER BY E.DATEEMPRUNT;
+         JOIN FilteredAdherents A ON E.NOADHERENT = A.NOADHERENT;
